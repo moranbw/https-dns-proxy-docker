@@ -23,7 +23,7 @@ docker run --name "https-dns-proxy" -p 5053:5053/udp -d bwmoran/https-dns-proxy
 docker run --name "https-dns-proxy" -p 5053:5053/udp  \
   -e DNS_SERVERS="94.140.14.14,94.140.15.15" \
   -e RESOLVER_URL="https://dns.adguard.com/dns-query" \
-  -e EXTRA_ARGS="-4 -vvv" \
+  -e EXTRA_FLAGS="-4 -vvv" \
   -d bwmoran/https-dns-proxy
 ```
    * points towards AdGuard DNS, only use IPv4, increase logging
