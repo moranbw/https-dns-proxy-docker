@@ -21,6 +21,6 @@ WORKDIR /https_dns_proxy
 
 ENV DNS_SERVERS="1.1.1.1,1.0.0.1"
 ENV RESOLVER_URL="https://cloudflare-dns.com/dns-query"
-ENV EXTRA_ARGS=""
+ENV EXTRA_FLAGS=""
 
-ENTRYPOINT ./https_dns_proxy -u proxy -g proxy -b $DNS_SERVERS -r $RESOLVER_URL -a 0.0.0.0 $EXTRA_ARGS
+ENTRYPOINT ./https_dns_proxy -u proxy -g proxy -b $DNS_SERVERS -r $RESOLVER_URL -a 0.0.0.0 $EXTRA_FLAGS
