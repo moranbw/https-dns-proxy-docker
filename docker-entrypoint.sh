@@ -21,4 +21,4 @@ if [ ! -z "$POLLING_INTERVAL" ]; then
         EXTRA_FLAGS="${EXTRA_FLAGS} -i ${POLLING INTERVAL} "
 fi
 
-exec ./https_dns_proxy -u proxy -g proxy -b $DNS_SERVERS -r $RESOLVER_URL -a 0.0.0.0 $EXTRA_FLAGS
+exec ./https_dns_proxy -u proxy -g proxy -b $DNS_SERVERS -r $RESOLVER_URL -a 0.0.0.0 $EXTRA_FLAGS | tee log/https_dns_proxy.log 

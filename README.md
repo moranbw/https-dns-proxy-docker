@@ -11,33 +11,43 @@ docker run --name "https-dns-proxy" -p 5053:5053/udp -d bwmoran/https-dns-proxy
 ```
 
 **environment variables**
-* DNS_SERVERS
-   * (default value: "1.1.1.1,1.0.0.1")
-   * -b flag from https_dns_proxy
-* RESOLVER_URL
-   * (default value: "https://cloudflare-dns.com/dns-query")
-   * -r flag from https_dns_proxy
-* IP_V4
-   * (true/false, default value: false)
-   * -4 flag from https_dns_proxy
-* HTTP_1
-   * (true/false, default value: false)
-   * -x flag from https_dns_proxy
-* PROXY_SERVER
-   * (default value: unused)
-   * -t flag from https_dns_proxy
-* DSCP_CODEPOINT
-   * (default value: unused)
-   * -c flag from https_dns_proxy
-* LOG_VERBOSITY
-   * (default value: unused)
-   * -v flag from https_dns_proxy
-* POLLING_INTERVAL
-   * (default value: 120)
-   * -i flag from https_dns_proxy
+```
+DNS_SERVERS
+   (default value: "1.1.1.1,1.0.0.1")
+   -b flag from https_dns_proxy
 
+DSCP_CODEPOINT
+   (default value: unused)
+   -c flag from https_dns_proxy
+
+HTTP_1
+   (true/false, default value: false)
+   -x flag from https_dns_proxy
+   
+IP_V4
+   (true/false, default value: false)
+   -4 flag from https_dns_proxy
+
+LOG_VERBOSITY
+   (default value: unused)
+   -v flag from https_dns_proxy
+
+POLLING_INTERVAL
+   (default value: 120)
+   -i flag from https_dns_proxy
+   
+PROXY_SERVER
+   (default value: unused)
+   -t flag from https_dns_proxy
+
+RESOLVER_URL
+   (default value: "https://cloudflare-dns.com/dns-query")
+   -r flag from https_dns_proxy
+```
 **custom run**
 ```
+### points towards AdGuard DNS, only use IPv4, increase logging ###
+
 docker run --name "https-dns-proxy" -p 5053:5053/udp  \
   -e DNS_SERVERS="94.140.14.14,94.140.15.15" \
   -e RESOLVER_URL="https://dns.adguard.com/dns-query" \
@@ -45,4 +55,28 @@ docker run --name "https-dns-proxy" -p 5053:5053/udp  \
   -e LOG_VERBOSITY="vvv" \
   -d bwmoran/https-dns-proxy
 ```
-   * points towards AdGuard DNS, only use IPv4, increase logging
+**logging**
+```
+### create a volume to log folder within container.  log can be viewed outside of container. ###
+
+docker run --name "https-dns-proxy" -p 5053:5053/udp  \
+  -e LOG_VERBOSITY="vvv" \
+  -v https-dns-proxy-log:/https_dns_proxy/log \
+  -d tmp/https-dns-proxy
+
+docker volume inspect https-dns-proxy-log
+
+[
+    {
+        "CreatedAt": "2021-02-21T16:44:09-05:00",
+        "Driver": "local",
+        "Labels": null,
+        "Mountpoint": "/var/lib/docker/volumes/https-dns-proxy-log/_data",
+        "Name": "https-dns-proxy-log",
+        "Options": null,
+        "Scope": "local"
+    }
+]
+
+cat /var/lib/docker/volumes/https-dns-proxy-log/_data/https_dns_proxy.log
+```

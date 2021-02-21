@@ -10,10 +10,13 @@ RUN apk add --no-cache \
 	&& \
 	mv docker-entrypoint.sh /https_dns_proxy/ \
 	&& \
-	chown -R proxy:proxy /https_dns_proxy \
-	&& \
 	cd /https_dns_proxy \
-	&& cmake . && make
+	&& \
+	mkdir log \
+	&& \
+	cmake . && make \
+	&& \
+	chown -R proxy:proxy /https_dns_proxy
 
 USER proxy
 
