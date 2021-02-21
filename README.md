@@ -1,4 +1,4 @@
-# https-dns-proxy <img alt="Docker Pulls" align="right" src="https://img.shields.io/docker/pulls/bwmoran/https-dns-proxy?style=flat-square">
+# https-dns-proxy <a href="https://hub.docker.com/r/bwmoran/https-dns-proxy"><img alt="Docker Pulls" align="right" src="https://img.shields.io/docker/pulls/bwmoran/https-dns-proxy?style=flat-square"></a>
 Simple container image for aarond10's https-dns-proxy library.
 
 https://github.com/aarond10/https_dns_proxy
