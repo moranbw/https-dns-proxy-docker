@@ -1,5 +1,7 @@
 FROM alpine:latest
+
 COPY docker-entrypoint.sh .
+
 RUN apk add --no-cache \
 	c-ares-dev curl-dev libev-dev openssl-dev \
 	git build-base cmake \
