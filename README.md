@@ -62,7 +62,7 @@ docker run --name "https-dns-proxy" -p 5053:5053/udp  \
 docker run --name "https-dns-proxy" -p 5053:5053/udp  \
   -e LOG_VERBOSITY="vvv" \
   -v https-dns-proxy-log:/https_dns_proxy/log \
-  -d tmp/https-dns-proxy
+  -d bwmoran/https-dns-proxy
 
 docker volume inspect https-dns-proxy-log
 
