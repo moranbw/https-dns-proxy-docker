@@ -27,4 +27,4 @@ WORKDIR /https_dns_proxy
 ENV DNS_SERVERS="1.1.1.1,1.0.0.1"
 ENV RESOLVER_URL="https://cloudflare-dns.com/dns-query"
 
-ENTRYPOINT ["/bin/sh", "./docker-entrypoint.sh"]
+ENTRYPOINT ["./docker-entrypoint.sh"]
