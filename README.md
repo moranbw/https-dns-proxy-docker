@@ -10,39 +10,49 @@ instructions
 docker run --name "https-dns-proxy" -p 5053:5053/udp -d bwmoran/https-dns-proxy
 ```
 
-**environment variables**
+**flags passed as environment variables**
 ```
-DNS_SERVERS
-   (default value: "1.1.1.1,1.0.0.1")
-   -b flag from https_dns_proxy
+   DNS_SERVERS       Comma-separated IPv4/v6 addresses and ports (addr:port)
+                     of DNS servers to resolve resolver host (e.g. dns.google).
+                     When specifying a port for IPv6, enclose the address in [].
+                     (default value: "1.1.1.1,1.0.0.1")
+                     
+                     -b flag from https_dns_proxy
 
-DSCP_CODEPOINT
-   (default value: unused)
-   -c flag from https_dns_proxy
+   DSCP_CODEPOINT    Optional DSCP codepoint[0-63] to set on upstream DNS server
+                     connections.
+                     (default value: unused)
 
-HTTP_1
-   (true/false, default value: false)
-   -x flag from https_dns_proxy
+                     -c flag from https_dns_proxy
+
+   POLLING_INTERVAL  Optional polling interval of DNS servers.
+                     (Default: 120, Min: 5, Max: 3600)
+
+                     -i flag from https_dns_proxy
    
-IP_V4
-   (true/false, default value: false)
-   -4 flag from https_dns_proxy
+   PROXY_SERVER      Optional HTTP proxy. e.g. socks5://127.0.0.1:1080
+                     Remote name resolution will be used if the protocol
+                     supports it (http, https, socks4a, socks5h), otherwise
+                     initial DNS resolution will still be done via the
+                     bootstrap DNS servers.  
+                     (default value: unused)
 
-LOG_VERBOSITY
-   (default value: unused)
-   -v flag from https_dns_proxy
+                     -t flag from https_dns_proxy
 
-POLLING_INTERVAL
-   (default value: 120)
-   -i flag from https_dns_proxy
-   
-PROXY_SERVER
-   (default value: unused)
-   -t flag from https_dns_proxy
+   RESOLVER_URL      The HTTPS path to the resolver URL.
+                     (default value: "https://cloudflare-dns.com/dns-query")
 
-RESOLVER_URL
-   (default value: "https://cloudflare-dns.com/dns-query")
-   -r flag from https_dns_proxy
+                     -r flag from https_dns_proxy
+```
+
+**flags passed as CMD arguments**
+```
+   -4                   Force IPv4 hostnames for DNS resolvers non IPv6 networks.
+
+   -x                   Use HTTP/1.1 instead of HTTP/2. Useful with broken
+                        or limited builds of libcurl. (false)
+                        
+   -v                   Increase logging verbosity. (INFO)
 ```
 **custom run**
 ```
@@ -51,7 +61,6 @@ RESOLVER_URL
 docker run --name "https-dns-proxy" -p 5053:5053/udp  \
   -e DNS_SERVERS="94.140.14.14,94.140.15.15" \
   -e RESOLVER_URL="https://dns.adguard.com/dns-query" \
-  -e IP_V4=true \
-  -e LOG_VERBOSITY="vvv" \
-  -d bwmoran/https-dns-proxy
+  -d bwmoran/https-dns-proxy \
+  -4 -vvv
 ```
