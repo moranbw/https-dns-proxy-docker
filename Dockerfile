@@ -28,7 +28,6 @@ RUN apk add --no-cache \
 
 USER nobody
 
-
 FROM release AS debug
 
 USER root
