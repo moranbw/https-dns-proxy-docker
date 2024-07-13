@@ -11,7 +11,7 @@ do
 	elif [ "$ARG" == "-v" ] || [ "$ARG" == "-vv" ] || [ "$ARG" == "-vvv" ]; then
 		EXTRA_FLAGS="${EXTRA_FLAGS} ${ARG} "
 	else
-		echo "Invald argument ${ARG}, exiting."
+		echo "Invalid argument ${ARG}, exiting."
 		exit 127
 	fi
 done
