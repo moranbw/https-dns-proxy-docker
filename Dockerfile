@@ -10,7 +10,7 @@ RUN apk add --no-cache \
     cmake -D CMAKE_BUILD_TYPE=Release . && \
     make
 
-FROM alpine:latest as runner
+FROM alpine:latest AS runner
 
 RUN apk add --no-cache \
       tini c-ares curl libev
